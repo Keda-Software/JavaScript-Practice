@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Array and object </title>
+</head>
+
+<body>
+  <h1>array and object</h1>
+  <script>
+/******************************************************************
+            JAVASCRIPT OBJECTS & ARRAYS (Pages 89 - 117)
+       Simple Notes for Presentation (With Comments)
+******************************************************************/
+
+// ==========================================================
+// PART 1 - JAVASCRIPT OBJECTS
+// ==========================================================
+
+/*
+------------------------------------------------------------
+What is an Object?
+------------------------------------------------------------
+
+An object is a collection of related data.
+
+Think of it like a real person.
+
+Person
+------
+Name
+Age
+Country
+Job
+
+Instead of storing each value separately, we store them together
+inside one object.
+
+Objects store data in KEY : VALUE pairs.
+
+Example:
+name --> "John"
+age  --> 25
+*/
+
+
+// ==========================================================
+// Types of Objects
+// ==========================================================
+
+/*
+1. Native (Built-in) Objects
+
+These are already provided by JavaScript.
+
+Examples:
+Math
+Date
+Array
+String
+
+You don't create them.
+JavaScript already has them.
+
+
+
+2. Host Objects
+
+These are provided by the environment.
+
+Example in Browser:
+window
+document
+
+Example in Node.js:
+process
+
+
+
+3. User-defined Objects
+
+These are objects created by programmers.
+
+Example:
+const student = {
+   name:"Ali"
+}
+*/
+
+
+// ==========================================================
+// Creating Objects
+// ==========================================================
+
+/*
+There are 3 common ways.
+*/
+
+
+// ----------------------------------------------------------
+// 1. Object Literal (Most Common)
+// ----------------------------------------------------------
+
+const person = {
+    name: "John",
+    age: 25,
+    country: "Ethiopia",
+
+    greet: function () {
+        console.log("Hello!");
+    }
+};
+
+/*
+Explanation
+
+name, age, country
+→ Properties
+
+greet()
+→ Method (Function inside object)
+*/
+
+
+// ----------------------------------------------------------
+// 2. Using new Object()
+// ----------------------------------------------------------
+
+const car = new Object();
+
+car.brand = "Toyota";
+car.model = "Corolla";
+
+////console.log(car);
+
+/*
+Creates an empty object
+Then we add properties.
+*/
+
+
+// ----------------------------------------------------------
+// 3. Constructor Function
+// ----------------------------------------------------------
+
+function Student(name, age){
+
+    this.name = name;
+    this.age = age;
+
+}
+
+const s1 = new Student("Ali",20);
+const s2 = new Student("Sara",22);
+
+////console.log(s1);
+//console.log(s2);
+
+/*
+Useful when creating many objects.
+
+Instead of writing the same object again and again,
+we use constructor functions.
+*/
+
+
+// ==========================================================
+// Accessing Object Properties
+// ==========================================================
+
+const user = {
+    name:"Ahmed",
+    age:20
+};
+
+
+// Dot Notation
+//console.log(user.name);
+
+
+// Bracket Notation
+//console.log(user["age"]);
+
+/*
+Both give the same result.
+*/
+
+
+// ==========================================================
+// Modifying Properties
+// ==========================================================
+
+user.age = 21;
+
+//console.log(user.age);
+
+/*
+Old value
+20
+
+New value
+21
+*/
+
+
+// ==========================================================
+// Adding New Properties
+// ==========================================================
+
+user.country = "Ethiopia";
+
+//console.log(user);
+
+/*
+The object now has one extra property.
+*/
+
+
+// ==========================================================
+// Deleting Properties
+// ==========================================================
+
+delete user.country;
+
+//console.log(user);
+
+/*
+country property is removed.
+*/
+
+
+// ==========================================================
+// Methods
+// ==========================================================
+
+const employee = {
+
+    name:"Abebe",
+
+    greet:function(){
+
+        console.log("Hello " + this.name);
+
+    }
+
+};
+
+////employee.greet();
+
+/*
+Method
+
+A function inside an object.
+
+this
+
+Refers to the current object.
+*/
+
+
+// ==========================================================
+// Nested Objects
+// ==========================================================
+
+const company = {
+
+    name:"Google",
+
+    address:{
+
+        city:"California",
+
+        country:"USA"
+
+    }
+
+};
+
+//console.log(company.address.city);
+
+/*
+Objects can contain another object.
+*/
+
+
+// ==========================================================
+// Object.keys()
+// ==========================================================
+
+//console.log(Object.keys(company));
+
+/*
+Returns all property names.
+
+Output
+
+["name","address"]
+*/
+
+
+// ==========================================================
+// Object.values()
+// ==========================================================
+
+//console.log(Object.values(company));
+
+/*
+Returns all values.
+*/
+
+
+// ==========================================================
+// Object.assign()
+// ==========================================================
+
+const obj1 = {
+
+    a:1
+
+};
+
+const obj2 = {
+
+    b:2,
+
+    c:3
+
+};
+
+Object.assign(obj1,obj2);
+
+//console.log(obj1);
+
+/*
+Copies properties from one object
+into another object.
+*/
+
+
+// ==========================================================
+// Constructor Function Example
+// ==========================================================
+
+function Car(brand,model){
+
+    this.brand=brand;
+
+    this.model=model;
+
+}
+
+const car1 = new Car("BMW","X5");
+
+//console.log(car1);
+
+/*
+Again,
+constructor functions create many similar objects.
+*/
+
+
+// ==========================================================
+// this Keyword
+// ==========================================================
+
+const teacher={
+
+    name:"Abdul",
+
+    introduce:function(){
+
+        console.log("My name is "+this.name);
+
+    }
+
+};
+
+//teacher.introduce();
+
+/*
+this
+
+Means
+
+"The object calling this method."
+*/
+
+
+// ==========================================================
+// Object Destructuring
+// ==========================================================
+
+const student={
+
+    name:"Ali",
+
+    age:22,
+
+    city:"Addis"
+
+};
+
+const {name,age}=student;
+
+//console.log(name);
+//console.log(age);
+
+/*
+Instead of
+
+student.name
+
+student.age
+
+We directly extract them.
+*/
+
+
+// ==========================================================
+// Checking Properties
+// ==========================================================
+
+//console.log("name" in student);
+
+//console.log(student.hasOwnProperty("age"));
+
+/*
+Both check if a property exists.
+*/
+
+
+// ==========================================================
+// Loop Through Object
+// ==========================================================
+
+for(let key in student){
+
+    //console.log(key,student[key]);
+
+}
+
+/*
+for...in
+
+Used to visit every property.
+*/
+
+
+// ==========================================================
+// Complete Object Example
+// ==========================================================
+
+const bike={
+
+    brand:"Yamaha",
+
+    start:function(){
+
+        console.log("Bike Started");
+
+    },
+
+    stop:function(){
+
+        console.log("Bike Stopped");
+
+    }
+
+};
+
+//bike.start();
+//bike.stop();
+
+
+
+// ==========================================================
+// PART 2 - JAVASCRIPT ARRAYS
+// ==========================================================
+
+/*
+------------------------------------------------------------
+What is an Array?
+------------------------------------------------------------
+
+Array stores multiple values inside one variable.
+
+Example
+
+Instead of
+
+fruit1
+fruit2
+fruit3
+
+We use
+
+fruits = ["Apple","Banana","Orange"]
+*/
+
+
+// ==========================================================
+// Creating Arrays
+// ==========================================================
+
+
+// Array Literal (Most Common)
+
+const fruits=["Apple","Banana","Orange"];
+
+
+// Constructor
+
+const colors=new Array("Red","Blue","Green");
+
+
+// ==========================================================
+// Accessing Elements
+// ==========================================================
+
+//console.log(fruits[0]);
+
+//console.log(fruits[2]);
+
+/*
+Arrays start counting from ZERO.
+
+0
+1
+2
+*/
+
+
+// ==========================================================
+// Modifying Elements
+// ==========================================================
+
+fruits[1]="Mango";
+
+//console.log(fruits);
+
+/*
+Banana becomes Mango.
+*/
+
+
+// ==========================================================
+// Length Property
+// ==========================================================
+
+//console.log(fruits.length);
+
+/*
+Returns total number of items.
+*/
+
+
+// ==========================================================
+// push()
+// ==========================================================
+
+fruits.push("Kiwi");
+
+//console.log(fruits);
+
+/*
+Adds item at END.
+*/
+
+
+// ==========================================================
+// pop()
+// ==========================================================
+
+fruits.pop();
+
+//console.log(fruits);
+
+/*
+Removes LAST item.
+*/
+
+
+// ==========================================================
+// shift()
+// ==========================================================
+
+fruits.shift();
+
+//console.log(fruits);
+
+/*
+Removes FIRST item.
+*/
+
+
+// ==========================================================
+// unshift()
+// ==========================================================
+
+fruits.unshift("Apple");
+
+//console.log(fruits);
+
+/*
+Adds item at beginning.
+*/
+
+
+// ==========================================================
+// indexOf()
+// ==========================================================
+
+//console.log(fruits.indexOf("Orange"));
+
+/*
+Returns position of item.
+*/
+
+
+// ==========================================================
+// includes()
+// ==========================================================
+
+//console.log(fruits.includes("Apple"));
+
+/*
+Returns
+
+true
+
+or
+
+false
+*/
+
+
+// ==========================================================
+// slice()
+// ==========================================================
+
+const newArray=fruits.slice(0,2);
+
+//console.log(newArray);
+
+/*
+Copies part of array.
+
+Original array does NOT change.
+*/
+
+
+// ==========================================================
+// splice()
+// ==========================================================
+
+fruits.splice(1,1,"Grape");
+
+//console.log(fruits);
+
+/*
+Can
+
+Remove
+
+Replace
+
+Insert
+
+elements.
+*/
+
+
+// ==========================================================
+// Loop Using for
+// ==========================================================
+
+for(let i=0;i<fruits.length;i++){
+
+    //console.log(fruits[i]);
+
+}
+
+/*
+Visits every item.
+*/
+
+
+// ==========================================================
+// forEach()
+// ==========================================================
+
+fruits.forEach( (item)=>{
+
+    //console.log(item);
+
+});
+
+/*
+Runs once for every item.
+*/
+
+
+// ==========================================================
+// map()
+// ==========================================================
+
+const upper=fruits.map(function (item){
+
+    return item.toUpperCase();
+
+});
+
+//console.log(upper);
+
+/*
+Creates a NEW array.
+
+Original array stays unchanged.
+*/
+
+
+// ==========================================================
+// Multi-dimensional Array
+// ==========================================================
+
+const matrix=[
+
+    [1,2,3],
+
+    [4,5,6],
+
+    [7,8,9]
+
+];
+
+//console.log(matrix[1][2]);
+
+/*
+First [] selects row.
+
+Second [] selects column.
+
+matrix[1][2]
+
+= 6
+*/
+
+
+// ==========================================================
+// Array Destructuring
+// ==========================================================
+
+const[firstFruit,secondFruit]=fruits;
+
+//console.log(firstFruit);
+
+//console.log(secondFruit);
+
+/*
+Extract values into variables.
+*/
+
+
+// ==========================================================
+// Spread Operator (...)
+// ==========================================================
+
+// Copy Array
+
+const copy=[...fruits];
+
+
+// Merge Arrays
+
+const vegetables=["Tomato","Potato"];
+
+const food=[...fruits,...vegetables];
+
+//console.log(copy);
+
+//console.log(food);
+
+/*
+...
+
+Copies arrays.
+
+Merges arrays.
+
+Very useful in modern JavaScript.
+*/
+
+
+// ==========================================================
+// QUICK REVISION
+// ==========================================================
+
+/*
+
+OBJECT
+
+✔ Stores data as key-value pairs
+
+Example
+
+{
+ name:"Ali",
+ age:20
+}
+
+
+ARRAY
+
+✔ Stores multiple values
+
+Example
+
+["Apple","Banana","Orange"]
+
+
+OBJECT ACCESS
+
+obj.name
+
+obj["name"]
+
+
+ARRAY ACCESS
+
+arr[0]
+
+arr[1]
+
+
+MOST IMPORTANT OBJECT METHODS
+
+Object.keys()
+
+Object.values()
+
+Object.assign()
+
+for...in
+
+this
+
+Destructuring
+
+
+MOST IMPORTANT ARRAY METHODS
+
+push()
+
+pop()
+
+shift()
+
+unshift()
+
+indexOf()
+
+includes()
+
+slice()
+
+splice()
+
+forEach()
+
+map()
+
+Spread (...)
+
+Destructuring
+
+length
+
+*/
+
+  </script>
+</body>
+
+</html>
