@@ -3,7 +3,7 @@
   Multi-line comment
   JavaScript ignores comments.
 */
-
+//hello
 // Display text in the console
 console.log("Hello, JavaScript!");
 
